@@ -1,0 +1,13 @@
+.oculto {
+    display: none;
+}
+
+#calculation1 {
+    color: blue;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#calculation2 {
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+}

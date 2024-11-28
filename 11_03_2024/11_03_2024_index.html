@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<h1>Marco Antônio Araújo Grossi - INF 2</h1>
+<p id="aba-lateral">Experimente clicar nos dias que estão em vermelho!</p>
+<style>
+.divday {
+    color: black;
+    padding: 5px;
+    background-color: rgb(248, 190, 102); }
+
+.divhoje {
+    color: rgb(18, 7, 80);
+    padding: 5px;
+    background-color: gray; }
+
+.cal_d_weeks {
+    background-color: lightblue; }
+
+.cal_calendar {
+    background-color: black;
+    color: white; }
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    width: 230px;
+    text-align: center; 
+}
+
+.tab {
+    width: 230px;
+    height: 250px;
+    margin: 0px;
+    padding: 0px; 
+}
+
+#especial {
+    background-color: red;
+}   
+
+#aba-lateral {
+    width: 900px;
+    text-align: justify;
+    background-color: rgb(132, 195, 250);
+    padding: 3px;
+    border: 1px solid rgb(155, 153, 153);
+    border-radius: 2%;
+}
+</style>
+<script>
+function calendar(mes) {
+let nomeMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 
+'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+let qntdDias = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+let diasSemana = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+
+let dataAtual = new Date();
+
+if(dataAtual.getFullYear() % 4 == 0)
+    qntdDias[1]++;
+
+let dataMes = new Date(dataAtual.getFullYear(), mes, 1)
+
+let table = "<table><thead>"
+            + "<tr><th class='cal_calendar' colspan='7'>"
+            + nomeMeses[dataMes.getMonth()] + ' ' +dataMes.getFullYear() 
+            + "</th></tr>" 
+            + "<tr class = 'cal_d_weeks'>"
+
+
+for(let i = 0; i < diasSemana.length; ++i) {
+    table += "<th>" + diasSemana[i] + "</th>"
+}
+
+table += "</tr></thead><tbody><tr>"
+
+console.log(dataMes.getDay())
+
+for(let i = 0; i < dataMes.getDay(); ++i)
+    table += "<td></td>"
+
+
+for(let i = 1; i < qntdDias[mes]+1; ++i) {
+    let dataOperacional = new Date (dataAtual.getFullYear(), mes, i)
+
+    if(dataOperacional.getDay() != 6) {
+        if((dataOperacional.getDate() == dataAtual.getDate() && dataOperacional.getMonth() == dataAtual.getMonth()) || ((dataOperacional.getMonth() == 1 && dataOperacional.getDate() == 28)  || (dataOperacional.getMonth() == 2 && dataOperacional.getDate() == 11) || (dataOperacional.getMonth() == 2 && dataOperacional.getDate() == 26))) {
+            if (dataOperacional.getDate() == dataAtual.getDate() && dataOperacional.getMonth() == dataAtual.getMonth())
+                table += "<td class = 'divhoje' style='border: 1px solid black'>" + i +  "</td>"
+
+            else
+                table += "<td class = 'divhoje' style='border: 1px solid black' id='especial'>" + i +  "</td>"
+        }
+        
+        else
+            table += "<td class='divday' style='border: 1px solid black'>" + i + "</td>"
+    }
+
+    else {
+        if(dataOperacional.getDate() == dataAtual.getDate() && dataOperacional.getMonth() == dataAtual.getMonth())
+            table += "<td class='divhoje' style='border: 1px solid black'>" + i + "</td></tr><tr>"
+        
+        else
+            table += "<td class='divday' style='border: 1px solid black'>" + i + "</td></tr><tr>"
+    }
+}
+
+table += "</tr></tdoby></table>"
+
+
+document.write(table)
+}
+
+let tabela = "<table style='text-align:center'>";
+let m = 0;
+for (let niv1 = 1; niv1 <= 3; niv1++) {
+    tabela += "<tr>"
+    
+    for (let niv2 = 1; niv2 <= 4; niv2++) {
+        tabela += "<td><div class='tab'><script>calendar(" + m + ")<\/script><\/div><\/td>"
+        m++
+    }
+
+    tabela += "</tr>"
+}
+
+tabela += "</table>"
+
+document.write(tabela)
+
+let especialEl = document.querySelectorAll("#especial")
+let abaLateralEl = document.querySelector('#aba-lateral')
+
+especialEl[1].addEventListener('click', () => {
+    abaLateralEl.innerHTML = `(11/03)<br><br>Oi, professor! <br><br>Nesse dia faltei pois estava com dengue. Te enviei dois atestados
+    por email, mas acho que o senhor só viu o primeiro deles. Para todos os efeitos, estou lhe enviando no email,
+    junto com as atividades, o atestado em anexo, além das atividades do dia 11/03. <br><br>Espero que entenda! <br> Abraço!`
+})
+
+especialEl[0].addEventListener('click', () => {
+    abaLateralEl.innerHTML = `(26/02)<br><br>Oi, professor! <br><br>Essa foi nossa segunda aula de laboratório. Tinha vindo de 
+    Nova Lima no ônibus que vai até a Cidade Industrial. Nesse dia, acabei esquecendo o telefone no ônibus, e tive
+    de ir até próximo da Cidade Industrial, correndo, para recuperá-lo. No dia, em sala, combinamos que eu poderia
+    lhe mostrar a atividade após a última aula (a do senhor era a 1ª), porém, a aula do Prof. Maffort acabou terminando
+    um pouco depois das 12:20 e não tive tempo de mostrá-lo o que tinha feito. <br> <br>
+    Na situação, logo depois da aula do Prof. Maffort, enviei ao senhor, através do email 'william.sallum@cefetmg.br',
+    a atividade completa do dia. O que pode ter acontecido, acredito eu, é que o senhor pode não ter verificado as
+    correspondências desse endereço e, por isso, não registrou a nota da atividade.<br><br>
+    Assim, novamente, para evitar qualquer problema, vou enviá-lo, por email, as atividades do dia 26/02 e o email que
+    lhe enviei à época. <br><br>Espero que enteda! <br>Abraço!`
+})
+
+especialEl[2].addEventListener('click', () => {
+    abaLateralEl.innerHTML = `(18/03)<br><br>Oi, professor!<br><br>Esta é a atividade que o senhor pediu que lhe enviasse por email!
+    <br><br>Abraço!`
+})
+
+</script>
+</head>
+<body>
+</body>
+</html>

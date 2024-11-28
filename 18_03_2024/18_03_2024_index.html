@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício Regexp</title>
+    <style>
+html {
+    background-image: linear-gradient(to right, rgb(153, 153, 240), rgb(156, 245, 156), rgb(255, 189, 189));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+body {
+    width: 50%;
+
+    background-color: aliceblue;
+    padding: 2%;
+    border: 1px solid rgb(134, 133, 133);
+    border-radius: 3%;
+}
+
+h2 {
+    font-weight: lighter;
+}
+
+label {
+    font-weight: bolder;
+}
+    </style>
+</head>
+<body>
+    <h2>Marco Antônio Araújo Grossi - INF 2</h2>
+
+    <section id="email">
+        <label>Insira um email:<br><input type="text" id="email-input"></label>
+        <article id="resposta-email"></article>
+    </section>
+
+    <section id="url">
+        <label>Insira uma url:<br><input type="text" id="url-input"></label>
+        <article id="resposta-url"></article>
+    </section>
+
+    <section id="telefone">
+        <label>Insira um número de telefone (formato: (xx)xxxxxxxxx):<br><input type="text" id="telefone-input"></label>
+        <article id="resposta-telefone"></article>
+    </section>
+
+    <section id="nome">
+        <label>Insira um nome e um sobrenome, seguido da idade:<br><input type="text" id="nome-input"></label>
+        <article id="resposta-nome"></article>
+    </section>      
+    
+    <section id="numero">
+        <label>Insira um número em padrão americano:<br><input type="text" id="numero-input"></label>
+        <article id="resposta-numero"></article>
+    </section>
+
+    <section id="username">
+        <label>Insira um username:<br><input type="text" id="username-input"></label>
+        <article id="resposta-username"></article>
+    </section>  
+
+    <section id="texto">
+        <label>Insira um texto que contenha alguma das siglas:<br><input type="text" id="texto-input"></label>
+        <article id="resposta-texto"></article>
+    </section>  
+    <script>
+        let emailInput = document.querySelector('#email-input')
+let urlInput = document.querySelector('#url-input')
+let telefoneInput = document.querySelector('#telefone-input')
+let nomeInput = document.querySelector('#nome-input')
+let numeroInput = document.querySelector('#numero-input')
+let usernameInput = document.querySelector('#username-input')
+let textoInput = document.querySelector('#texto-input')
+
+let respostaEmail = document.querySelector('#resposta-email')
+let respostaUrl = document.querySelector('#resposta-url')
+let respostaTelefone = document.querySelector('#resposta-telefone')
+let respostaNome = document.querySelector('#resposta-nome')
+let respostaNumero = document.querySelector('#resposta-numero')
+let respostaUsername = document.querySelector('#resposta-username')
+let respostaTexto = document.querySelector('#resposta-texto')
+
+const imprimeResposta = (caixa, resultado) => {
+    if(resultado == true)
+        caixa.innerHTML = "✅"
+    
+    else
+        caixa.innerHTML = "⛔"
+}
+
+const verificaEmail = () => {
+    let emailAceito = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i
+
+    imprimeResposta(respostaEmail, emailAceito.test(emailInput.value))
+}
+ 
+const verificaUrl = () => {
+    let urlAceito = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:?#[\]@@!\$&'\ (\)\*\+,;=.]+$/
+
+    imprimeResposta(respostaUrl, urlAceito.test(urlInput.value))    
+}
+
+const verificaTelefone = () => {
+    let telefoneAceito = /\([0-9]{2}\)[0-9]{9}/
+
+    imprimeResposta(respostaTelefone, telefoneAceito.test(telefoneInput.value))    
+}
+
+const verificaNome = () => {
+    let nomeAceito = /[A-Z][a-z]* [A-Z][a-z]*, [0-9]{1,2}/
+
+    imprimeResposta(respostaNome, nomeAceito.test(nomeInput.value))
+}
+
+const formataNumero = () => {
+    let numeroFormatado = numeroInput.value.toString().replace('.', ',');
+
+    numeroFormatado = numeroFormatado.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    respostaNumero.innerHTML = "✅" + numeroFormatado
+}
+
+const verificaUsername = () => {
+    let usernameAceito = /^[a-zA-Z][a-zA-Z0-9]{0,8}[1-5]$/
+
+    imprimeResposta(respostaUsername, usernameAceito.test(usernameInput.value))
+}
+
+emailInput.addEventListener('input', () => verificaEmail())
+urlInput.addEventListener('input', () => verificaUrl())
+telefoneInput.addEventListener('input', () => verificaTelefone())
+nomeInput.addEventListener('input', () => verificaNome())
+numeroInput.addEventListener('input', () => formataNumero())
+usernameInput.addEventListener('input', () => verificaUsername())
+
+let traducoes = {
+    "B2B": "Business to Business",
+    "BBS": "Bulletin Board System",
+    "BIOS": "Basic Input Output System",
+    "BI": "Business Intelligence",
+    "BIT": "Binary DigiT",
+    "BPS": "Bits Per Second – Bits por Segundo",
+    "CEM": "Customer Experience Management – Gerenciamento da Experiência do Usuário",
+    "CEO": "Chief Executive Officer",
+    "COBOL": "COmmon Business Oriented Language – Linguagem Comum Orientada para Negócios",
+    "CPU": "Central Processor Unit",
+    "DDR": "Double Data Rate",
+    "DHTML": "HTML, Javascript e CSS, aliadas ao DOM",
+    "DNS": "Domain Name System",
+    "FAQ": "Frequently Asked Questions",
+    "FTP": "File Transfer Protocol",
+    "HTTPS": "Hypertext Transfer Protocol Secure",
+    "IOT": "Internet Of Things",
+    "ITIL": "Information Technology Infrastructure Library",
+    "LAN": "Local Area Network",
+    "OCR": "Optical Character Recognition",
+    "PDF": "Portable Document Format",
+    "SQL": "Structured Query Language",
+    "TCP": "Transmission Control Protocol",
+    "TIC": "Tecnologia da Informação e Comunicação",
+    "URL": "Uniform Resource Locator",
+    "VPN": "Virtual Private Network",
+    "XML": "Extensible Markup Language",
+    "SATA": "Serial Advanced Technology Attachment"
+}
+
+/* 
+Oi, professor! Para fazer essa questão, tive que pesquisar formas de recuperar todos os 'objetos chave' de
+um objeto. O melhor método que encontrei foi utilizando o 'Object.keys().join()'. Coloquei a '|' entre todos
+os valores porque qualquer uma das siglas, se encontrada, pode ser substituida.
+*/
+const traduzirSiglas = (texto) => {
+    let siglasAceita = new RegExp("\\b(" + Object.keys(traducoes).join("|") + ")\\b", "g")
+
+    texto.replace
+
+    let textoTraduzido = texto.replace(siglasAceita, (match) => {
+        return traducoes[match.toUpperCase()]
+    })
+
+    return textoTraduzido;
+}
+
+const traduzTexto = () => {
+    respostaTexto.innerHTML = "✅'" + traduzirSiglas(textoInput.value)+ "'"
+}
+
+textoInput.addEventListener('input', () => traduzTexto())
+    </script>
+</body>
+</html>
