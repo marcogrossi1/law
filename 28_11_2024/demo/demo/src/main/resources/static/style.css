@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+
+.hidden {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+}
+
+#connection {
+    background-color: darkgrey;
+    padding: 1%;
+    margin: 5% 5% 1% 5%;
+    border: 1px solid black;
+    border-radius: 2%;
+}
+
+#message-box {
+    background-color: rgb(240, 255, 219);
+    padding: 1%;
+    margin: 5% 5% 1% 5%;
+    border: 1px solid black;
+    border-radius: 2%;
+}
+
+.color0 {
+    color: #cf9eb0;
+}
+
+.color1 {
+    color: #ffabcb;
+}
+
+.color2 {
+    color: #ff8cb6;
+}
+
+.color3 {
+    color: #6ebbff;
+}
+
+.color4 {
+    color: #54aafc;
+}

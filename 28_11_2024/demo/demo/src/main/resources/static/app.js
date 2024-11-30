@@ -19,16 +19,23 @@ stompClient.onStompError = (frame) => {
     console.error('Additional details: ' + frame.body);
 };
 
+let connection = false
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
     if (connected) {
         $("#conversation").show();
+        connection = true
     }
+    
     else {
         $("#conversation").hide();
+        connection = false
     }
-    $("#greetings").html("");
+}
+
+function getConnection() {
+    return connection
 }
 
 function connect() {
@@ -44,11 +51,13 @@ function disconnect() {
 function sendName() {
     stompClient.publish({
         destination: "/app/hello",
-        body: JSON.stringify({'name': $("#name").val(), 'content' : $("#content").val()})    });
+        body: JSON.stringify({'name': $("#name").val(), 'content' : $("#text-box").val()})
+    });
 }
 
 function showGreeting(message) {
-    $(".inbox").append("<tr><td>" + message + "</td></tr>");
+    let randomColor = Math.floor(4 * Math.random())
+    $("#inbox").append('<tr><td class="color' + randomColor + '">' + message + "</td></tr>");
 }
 
 $(function () {

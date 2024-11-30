@@ -4,10 +4,9 @@ public class HelloMessage {
     private String name;
     private String content;
 
-    public HelloMessage() {}
-
     public HelloMessage(String name, String content) {
         this.name = name;
+        this.content = content;
     }
 
     public String getName() {

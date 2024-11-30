@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hello WebSocket</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
-    <script src="/app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+<noscript>
+    <h2 style="color: #ff0000">
+    Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
-<div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
-                    <label for="content">What is your message?</label>
-                    <input type="text" size="50" id="content" class="form-control" placeholder="Your message here...">
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Greetings</th>
-                </tr>
-                </thead>
-                <tbody id="greetings">
-                </tbody>
-            </table>
-        </div>
-    </div>
+    Javascript and reload this page!</h2>
+</noscript>
+    <header>
+        <h2>CHAT</h2>
+        <p>
+            Este é um chat que funciona com servidor backend Java, criado utilizando o framework Spring
+            desenvolvido como tarefa da disciplina de Aplicações WEB do Cefet-MG.
+        </p>
+    </header>
+    <main>
+        <section id="connection">
+            <label for="connect">WebSocket connection:</label>
+            <button id="connect" type="submit">Connect</button>
+            <button id="disconnect" type="submit" disabled="disabled">Disconnect</button>
+        </section>
+        
+        <section id="message-box">
+            <article id="login">
+                <label>Enter your name: <input type="text" id="name" class="text-box" placeholder="Insira seu nome..."></label>
+            </article>
 
-    <section class="inbox">
-    </section>
-</div>
+            <article id="conversation">
+                <h4>Chat</h4>
+                <table id="inbox">
+                    <tbody>
+                    
+                    </tbody>
+                </table>
+            </article>
+
+            <form class="form-inline">
+                <input type="text" id="text-box" placeholder="Insira sua mensagem aqui">
+                <button id="send" type="submit" class="btn">Send</button>
+            </form>
+        </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
